@@ -1,0 +1,18 @@
+{
+"manifest_version": 2,
+    "name": "Konami Code",
+    "description": "Change all directions to the Konami Code",
+    "version": "0.1",
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
