@@ -1,2 +1,2 @@
 # konami-code
-Change all directions to the Konami Code
+Chrome extension that changes all directions to the Konami Code
