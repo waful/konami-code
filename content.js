@@ -1,8 +1,14 @@
 var elements = document.getElementsByTagName('*');
 
+function toTitleCase(str){
+    return str.replace(new RegExp('\\w+', 'g'), function(thing){
+        return thing.charAt(0).toUpperCase() + thing.substr(1).toLowerCase();
+    });
+}
+
+
 var wordsToReplace = [
-    ['up|down|left|right', 'up up down down left right left right B A'],
-    ['Up|Down|Left|Right', 'Up Up Down Down Left Right Left Right B A']
+    ['up|down|left|right', 'up up down down left right left right B A']
 ];
 
 for(var i = 0; i < elements.length; i++){
@@ -18,10 +24,8 @@ for(var i = 0; i < elements.length; i++){
                 for(var k = 0; k < wordsToReplace.length; k++){
                     var wordToReplace = wordsToReplace[k];
                     replacedText = replacedText
-                        .replace(new RegExp('([^A-Za-z])+(' + wordToReplace[0] + ')([^A-Za-z])+', 'g'), '$1' + wordToReplace[1] + '$3')
-                        .replace(new RegExp('^(' + wordToReplace[0] + ')([^A-Za-z])+', 'g'), wordToReplace[1] + '$2')
-                        .replace(new RegExp('([^A-Za-z])+(' + wordToReplace[0] + ')$', 'g'), '$1' + wordToReplace[1])
-                        .replace(new RegExp('^(' + wordToReplace[0] + ')$', 'g'), wordToReplace[1]);
+                        .replace(new RegExp('\\b(' + wordToReplace[0] + ')\\b', 'g'), wordToReplace[1])
+                        .replace(new RegExp('\\b(' + toTitleCase(wordToReplace[0]) + ')\\b', 'g'), toTitleCase(wordToReplace[1]));
                 }
                 if(replacedText !== text){
                     element.replaceChild(document.createTextNode(replacedText), node);
